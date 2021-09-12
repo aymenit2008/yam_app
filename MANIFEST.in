@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include yam_app *.css
+recursive-include yam_app *.csv
+recursive-include yam_app *.html
+recursive-include yam_app *.ico
+recursive-include yam_app *.js
+recursive-include yam_app *.json
+recursive-include yam_app *.md
+recursive-include yam_app *.png
+recursive-include yam_app *.py
+recursive-include yam_app *.svg
+recursive-include yam_app *.txt
+recursive-exclude yam_app *.pyc

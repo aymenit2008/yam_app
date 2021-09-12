@@ -1,0 +1,109 @@
+<h2 class="text-center">{%= __("Statement of Account") %}</h2>
+<h4 class="text-center">
+	{% if (filters.party_name) { %}
+		{%= filters.party_name %}
+	{% } else if (filters.party && filters.party.length) { %}
+		{%= filters.party %}
+	{% } else if (filters.account) { %}
+		{%= filters.account %}
+	{% } %}
+</h4>
+
+<h6 class="text-center">
+	{% if (filters.tax_id) { %}
+	{%= __("Tax Id: ")%}	{%= filters.tax_id %}
+	{% } %}
+</h6>
+<!-- 
+<h5 class="text-center">
+	{%= frappe.datetime.str_to_user(filters.from_date) %}
+	{%= __("to") %}
+	{%= frappe.datetime.str_to_user(filters.to_date) %}
+</h5> -->
+
+<hr>
+<table class="table table-striped">
+	<thead style="font-size:11px;">
+		<tr>
+			<th style="width: 7%;" rowspan="2">{%= __("Date") %}</th>
+			<th style="width: 11%;" rowspan="2" >{%= __("Ref GL") %}</th>
+			<th style="width: 11%;" rowspan="2" >{%= __("Ref") %}</th>
+			<th style="width: 20%;" rowspan="2">{%= __("Party") %}</th>			
+			<th style="width: 7%;" rowspan="2">{%= __("Cost Center") %}</th>
+			<th style="width: 7%;" rowspan="2">{%= __("Funder") %}</th>
+			<th style="width: 7%;" rowspan="2">{%= __("Project") %}</th>
+			<th style="width: 7%;" rowspan="2">{%= __("DRL") %}</th>
+			<!-- <th style="width: 7%;" rowspan="2">{%= __("EUR Amount") %}</th> -->
+			<th style="width: 10%;" colspan="2" rowspan="2">{%= __("Transaction Amount") %}</th>
+		</tr>
+	</thead>
+	<tbody style="font-size:10px;">
+		{% for(var i=0, l=data.length; i<l; i++) { %}
+			
+			{% if(data[i].posting_date) { %}
+			<tr>
+				<td rowspan="2">{%= frappe.datetime.str_to_user(data[i].posting_date) %}</td>
+				<td rowspan="2">{%= data[i].gl_entry %}</td>
+				<td rowspan="2">{%= data[i].voucher_type %}
+					<br>{%= data[i].voucher_no %}</td>
+				<td rowspan="2">					
+
+					{{ __("Account") }}: {%= data[i].account %}
+					{% if(filters.party && filters.party_type) { %}
+						<br>{%= __("Party") %}: {%= data[i].party %}
+					{% } %}
+					<br>{%= __("Remarks") %}: {%= data[i].remarks %}
+					{% if(data[i].bill_no) { %}
+						<br>{%= __("Supplier Invoice No") %}: {%= data[i].bill_no %}
+					{% } %}
+					{% if(data[i].party) { %}
+						<br>{%= __("party") %}: {%= data[i].party %}  
+					{% } %}
+				</td>
+					 
+					<td style="text-align: center" rowspan="2">{%= data[i].sun_cost_center %}</td>	
+					<td style="text-align: center" rowspan="2">{%= data[i].customer %}</td>
+					<td style="text-align: center" rowspan="2">{%= data[i].project %}</td>
+					<td style="text-align: center" rowspan="2">{%= data[i].project_activities %}</td>
+					<!-- <td style="text-align: center" >{%= flt(data[i].debit_in_eur,2) %}</td> -->
+					<td style="text-align: right" >D</td>
+					<td style="text-align: right" >{%= format_currency(data[i].debit, data[i].account_currency) %}</td>
+					
+				</tr>
+				<tr>
+					<!-- <td style="text-align: center" >{%= format_currency(data[i].credit_in_eur,"ERU") %}</td> -->
+					<td style="text-align: right" >C</td>
+					<td style="text-align: right" >{%= format_currency(data[i].credit, data[i].account_currency) %}</td>
+					
+				</tr>>
+					
+			{% } %}
+
+		
+				
+				
+			
+		{% } %}
+<!-- 
+		<tr>
+						
+			<td style="text-align: center" colspan="7" rowspan="2"></td>	
+			<td style=" align: center;" rowspan="2" class="align-middle" >Total:</td>	
+			<td style="text-align: center"  >1</td>	
+
+
+		</tr>
+		<tr>
+						
+			<td style="text-align: center"  >2</td>	
+
+
+		</tr>
+		 -->
+	</tbody>
+</table>
+<br>
+<br>
+
+<p class="text-right text-muted" style="font-size: small;"><strong>Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</strong></p>
+<p class="text-right text-muted" style="font-size: small;"><strong>Printed By {{ frappe.session.user }}</strong></p>

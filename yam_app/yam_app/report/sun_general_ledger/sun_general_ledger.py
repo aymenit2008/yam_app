@@ -400,6 +400,7 @@ def get_columns(filters):
 			"options": "Account",
 			"width": 180
 		},
+
 		{
 			"label": _("Account Currency"),
 			"fieldname": "account_currency",

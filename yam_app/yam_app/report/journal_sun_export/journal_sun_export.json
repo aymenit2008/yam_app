@@ -1,0 +1,38 @@
+{
+ "add_total_row": 1,
+ "creation": "2021-11-23 16:35:33.281040",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "General Letter Head",
+ "modified": "2021-11-28 20:45:37.422763",
+ "modified_by": "Administrator",
+ "module": "Yam App",
+ "name": "Journal Sun Export",
+ "owner": "aymen.alsurabi@yamaan.org",
+ "prepared_report": 0,
+ "query": "select\tg.voucher_no ,g.account_currency , g.posting_date,g.remarks , SUBSTRING(a.account_number,1,6) account_number  , (g.debit_in_account_currency - g.credit_in_account_currency) d_c ,\" \" as blank , \" \" as Base_amount, \" \" as memo_amount ,g.sun_cost_center,g.customer , g.project,\r\n        g.project_activities, g.party_type, g.party,\r\n\t\t\tg.voucher_type, g.cost_center , g.currency,\r\n\t\t\tg.against_voucher_type, g.against_voucher, g.account_currency\r\n\t\t\t, g.against, g.is_opening \r\n\t\tfrom `tabGL Entry` g , tabAccount a  where (g.party_type is null or g.party_type =\"\") and     g.account = a.name and  Date(g.posting_date) between %(from_date)s and %(to_date)s\r\n\t\t\r\n\r\nunion\r\n\r\nselect\tg.voucher_no ,g.account_currency , g.posting_date,g.remarks , e.last_code account_number  , (g.debit_in_account_currency - g.credit_in_account_currency) d_c ,\" \" as blank , \" \" as Base_amount, \" \" as memo_amount ,g.sun_cost_center,g.customer , g.project,\r\n        g.project_activities, g.party_type, g.party,\r\n\t\t\tg.voucher_type, g.cost_center , g.currency,\r\n\t\t\tg.against_voucher_type, g.against_voucher, g.account_currency\r\n\t\t\t, g.against, g.is_opening \r\n\t\tfrom `tabGL Entry` g , tabAccount a ,`tabEmployee Account` e where g.party_type = 'Employee Account' and g.account = a.name and g.party = e.name and  Date(g.posting_date) between %(from_date)s and %(to_date)s\r\n\t\t\r\nunion\r\n\r\nselect\tg.voucher_no ,g.account_currency , g.posting_date,g.remarks , e.last_code account_number  , (g.debit_in_account_currency - g.credit_in_account_currency) d_c ,\" \" as blank , \" \" as Base_amount, \" \" as memo_amount ,g.sun_cost_center,g.customer , g.project,\r\n        g.project_activities, g.party_type, g.party,\r\n\t\t\tg.voucher_type, g.cost_center , g.currency,\r\n\t\t\tg.against_voucher_type, g.against_voucher, g.account_currency\r\n\t\t\t, g.against, g.is_opening \r\n\t\tfrom `tabGL Entry` g , tabAccount a ,`tabSupplier` e where g.party_type = 'Supplier' and g.account = a.name and g.party = e.name and  Date(g.posting_date) between %(from_date)s and %(to_date)s\r\n\r\nunion\r\n\r\nselect\tg.voucher_no ,g.account_currency , g.posting_date,g.remarks , e.last_code account_number  , (g.debit_in_account_currency - g.credit_in_account_currency) d_c ,\" \" as blank , \" \" as Base_amount, \" \" as memo_amount ,g.sun_cost_center,g.customer , g.project,\r\n        g.project_activities, g.party_type, g.party,\r\n\t\t\tg.voucher_type, g.cost_center , g.currency,\r\n\t\t\tg.against_voucher_type, g.against_voucher, g.account_currency\r\n\t\t\t, g.against, g.is_opening \r\n\t\tfrom `tabGL Entry` g , tabAccount a ,`tabCustomer` e where g.party_type = 'Customer' and  g.account = a.name and g.party = e.name and  Date(g.posting_date) between %(from_date)s and %(to_date)s\r\n",
+ "ref_doctype": "GL Entry",
+ "report_name": "Journal Sun Export",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Auditor"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Accounts Printer"
+  }
+ ]
+}

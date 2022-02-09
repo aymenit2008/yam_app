@@ -40,8 +40,8 @@
 			<th style="width: 7%;" rowspan="2">{%= __("Funder") %}</th>
 			<th style="width: 7%;" rowspan="2">{%= __("Project") %}</th>
 			<th style="width: 7%;" rowspan="2">{%= __("DRL") %}</th>
-			<!-- <th style="width: 7%;" rowspan="2">{%= __("EUR Amount") %}</th> -->
-			<th style="width: 10%;" colspan="2" rowspan="2">{%= __("Transaction Amount") %}</th>
+			 <th style="width: 7%;" colspan="2">{%= __("EUR Amount") %}</th> 
+			<th style="width: 10%;" rowspan="2" rowspan="2">{%= __("Transaction Amount") %}</th>
 		</tr>
 	</thead>
 	<tbody style="font-size:10px;">
@@ -72,15 +72,17 @@
 					<td style="text-align: center" rowspan="2">{%= data[i].customer %}</td>
 					<td style="text-align: center" rowspan="2">{%= data[i].project %}</td>
 					<td style="text-align: center" rowspan="2">{%= data[i].project_activities %}</td>
-					<!-- <td style="text-align: center" >{%= flt(data[i].debit_in_eur,2) %}</td> -->
 					<td style="text-align: right" >D</td>
-					<td style="text-align: right" >{%= format_currency(data[i].debit, data[i].account_currency) %}</td>
+					<td style="text-align: center" >{%= format_currency(data[i].debit,"EUR") %}</td>
+					
+					<td style="text-align: right" >{%= format_currency(data[i].debit_in_account_currency, data[i].account_currency) %}</td>
 					
 				</tr>
 				<tr>
-					<!-- <td style="text-align: center" >{%= format_currency(data[i].credit_in_eur,"ERU") %}</td> -->
 					<td style="text-align: right" >C</td>
-					<td style="text-align: right" >{%= format_currency(data[i].credit, data[i].account_currency) %}</td>
+					<td style="text-align: center" >{%= format_currency(data[i].credit,"EUR") %}</td>
+					
+					<td style="text-align: right" >{%= format_currency(data[i].credit_in_account_currency, data[i].account_currency) %}</td>
 					
 				</tr>>
 					

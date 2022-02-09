@@ -348,12 +348,12 @@ def get_result_as_list(data, filters):
 
 		d['account_currency'] = d.get('account_currency')
 		d['bill_no'] = inv_details.get(d.get('against_voucher'), '')
-		d['yer'] = d.get('debit') if flt(d.get('debit'))>0.0 else d.get('credit')
+		#d['yer'] = d.get('debit') if flt(d.get('debit'))>0.0 else d.get('credit')
 		d['usd'] = d.get('debit_in_usd') if flt(d.get('debit_in_usd'))>0 else d.get('credit_in_usd')
 		d['eur'] = d.get('debit_in_eur') if flt(d.get('debit_in_eur'))>0 else d.get('credit_in_eur')
 		d['gbp'] = d.get('debit_in_gbp') if flt(d.get('debit_in_gbp'))>0 else d.get('credit_in_gbp')
-		d['debit'] = d.get('debit_in_account_currency')
-		d['credit'] = d.get('credit_in_account_currency')
+		#d['debit'] = d.get('debit_in_account_currency')
+		#d['credit'] = d.get('credit_in_account_currency')
 	return data
 
 def get_supplier_invoice_details():
@@ -417,6 +417,18 @@ def get_columns(filters):
 		{
 			"label": _("Credit"),
 			"fieldname": "credit",
+			"fieldtype": "Float",
+			"width": 100
+		},
+		{
+			"label": _("Debit in Account Currency"),
+			"fieldname": "debit_in_account_currency",
+			"fieldtype": "Float",
+			"width": 100
+		},
+		{
+			"label": _("Credit in Account Currency"),
+			"fieldname": "credit_in_account_currency",
 			"fieldtype": "Float",
 			"width": 100
 		},
